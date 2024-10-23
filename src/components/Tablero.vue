@@ -19,6 +19,9 @@ export default {
         //metodo para aumetar el contador de pokémon
         aumentarContador() {
             this.contadorDescubiertos++; 
+            if(this.contadorDescubiertos == 20){
+                alert('¡Felicidades, has descubierto todos los Pokémon!');
+            }
         }
     },
     components: {
