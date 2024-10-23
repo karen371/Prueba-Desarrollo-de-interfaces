@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+:root {
+  font-family: 'Comic Neue', cursive;
+  line-height: 1;
+  font-weight: 400;
+}
+
+#app {
+  width: 100%;
+  height: 100vh;
+}
+
+
