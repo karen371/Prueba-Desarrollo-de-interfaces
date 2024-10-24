@@ -87,7 +87,8 @@ export default {
 }
 
 .descubrir{
-    filter: brightness(0) grayscale(100%);
+    /*filter: brightness(0) grayscale(100%);*/
+    filter: blur(5px) grayscale(100%);
 }
 
 .contenedor-input {
