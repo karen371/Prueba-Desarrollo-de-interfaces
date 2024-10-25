@@ -2,6 +2,10 @@
 import axios from 'axios';
 export default {
     props: { //paso de datos por props
+        contadorDescubiertos: { // Recibiendo el contador como prop
+            type: Number,
+            required: true
+        },
         pokemon: {
             type: Object,
             required: true
@@ -48,11 +52,11 @@ export default {
     <div class="contenedor-card">
         <div class="contenedor-imagen">
             <!--Asignacion de class binding-->
-            <img :src="imageUrl" alt="Imagen" :class="{ descubrir: isDiscovered }" />
+            <img :src="imageUrl" alt="Imagen" :class="{ descubrir: isDiscovered, 'clase-baile': contadorDescubiertos >= 20, 'mover-imagen': contadorDescubiertos >= 20 }" />
         </div>
         <!--Elementos para mostrar u ocultar contenido V-IF-->
         <div class="contenedor-input" v-if="isDiscovered"> 
-            <input type="text" placeholder="Nombre del Pokémon" v-model="nomPokemon" />
+            <input type="text" placeholder="Nombre del Pokémon" v-model="nomPokemon"  @keyup.enter="descubrirPokemon"/>
             <button @click="descubrirPokemon">Descubrir</button>
         </div>
         <div class="contenedor-input" v-if="!isDiscovered"> 
@@ -84,6 +88,22 @@ export default {
     max-width: 150%; 
     max-height: 100%; 
     object-fit: cover;
+}
+
+.clase-baile{
+    /* Estilos para la imagen cuando el contador llegue a 20 */
+    transform: scale(1.1); /* Ejemplo de escalar la imagen */
+}
+@keyframes mover {
+    0% { transform: translateX(0) rotate(0deg); }
+    25% { transform: translateX(10px) rotate(5deg); } /* Desplazamiento a la derecha y rotación */
+    50% { transform: translateX(-10px) rotate(-5deg); } /* Desplazamiento a la izquierda y rotación */
+    75% { transform: translateX(10px) rotate(5deg); } /* Regresar a la posición original */
+    100% { transform: translateX(0) rotate(0deg); } /* Volver a la posición original */
+}
+
+.mover-imagen {
+    animation: mover 1s infinite; /* Cambia el tiempo y la cantidad de repeticiones como desees */
 }
 
 .descubrir{

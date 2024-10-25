@@ -1,6 +1,7 @@
 <script>
 import logo from '../assets/pokemon-logo.png'
 import Card from './Card.vue';
+import confetti from 'canvas-confetti'; /*libreria para el confetti*/
 
 export default {
     data() {
@@ -19,9 +20,23 @@ export default {
         //metodo para aumetar el contador de pokémon
         aumentarContador() {
             this.contadorDescubiertos++; 
-            if(this.contadorDescubiertos == 20){
-                alert('¡Felicidades, has descubierto todos los Pokémon!');
+            this.$emit('contador-cambiado', this.contadorDescubiertos);
+            console.log(this.contadorDescubiertos);
+             // Llamar a la función para mostrar confetti
+            if (this.contadorDescubiertos === 20) {
+                this.mostrarConfetti();
             }
+        },
+        mostrarConfetti() {
+        // Iniciar el confetti
+            confetti({
+                particleCount: 200,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+
+            // Mostrar mensaje
+            alert('¡Felicidades! Has descubierto 20 Pokémon.');
         }
     },
     components: {
@@ -41,6 +56,7 @@ export default {
                 v-for="pokemones in pokemon" 
                 :key="pokemones.name" 
                 :pokemon="pokemones" 
+                :contador-descubiertos="contadorDescubiertos"
                 @pokemon-descubierto="aumentarContador"
             />
         </div>
